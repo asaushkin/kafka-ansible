@@ -1,0 +1,18 @@
+plugin: aws_ec2
+
+regions:
+  - eu-west-1
+
+hostnames:
+  - tag:dns
+  - dns-name
+
+groups:
+    zookeeper: "'zookeeper' in tags"
+    kafka_broker: "'kafka_broker' in tags"
+    schema_registry: "'schema_registry' in tags"
+    control_center: "'control_center' in tags"
+    kafka_connect: "'kafka_connect' in tags"
+    kafka_rest: "'kafka_rest' in tags"
+    ksql: "'ksql' in tags"
+

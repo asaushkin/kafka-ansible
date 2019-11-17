@@ -1,0 +1,3 @@
+ansible -i aws_ec2.yml all -m ping
+ansible-playbook -i aws_ec2.yml all.yml
+ansible-inventory -i aws_ec2.yml --graph

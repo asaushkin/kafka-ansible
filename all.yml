@@ -1,6 +1,19 @@
 - name: Host Prerequisites
   hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest
   tasks:
+  - name: Add a new user
+    user:
+      name: ags
+      shell: /bin/bash
+  - name: Deploy SSH Key
+    authorized_key:
+      user: ags
+      key: "{{ lookup('file', '/home/ags/.ssh/id_rsa.pub') }}"
+      state: present
+  - name: Add devops user to the sudoers
+    copy:
+      dest: "/etc/sudoers.d/ags"
+      content: "ags  ALL=(ALL)  NOPASSWD: ALL"
   - import_role:
       name: confluent.common
   - import_role:

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+python3 -m venv ${current_dir}/venv
+
+source ${current_dir}/venv/bin/activate
+
+pip3 install wheel 
+pip3 install ansible awscli botocore boto3
+
+pip3 install j2cli j2cli[yaml]
+
