@@ -15,4 +15,7 @@ groups:
     kafka_connect: "'kafka_connect' in tags"
     kafka_rest: "'kafka_rest' in tags"
     ksql: "'ksql' in tags"
+    mysql: "'mysql' in tags"
+    mysql_master: "'mysql_master' in tags"
+    mysql_slave: "'mysql_slave' in tags"
 

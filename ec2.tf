@@ -95,3 +95,43 @@ resource "aws_instance" "control-center" {
     ]
   }
 }
+
+resource "aws_instance" "mysql1" {
+  ami                         = "ami-04c58523038d79132"
+  instance_type               = "t2.small"
+  key_name                    = "asaushkin"
+  associate_public_ip_address = true
+  vpc_security_group_ids      = ["sg-07c4666eb1d450f1e"]
+
+  tags = {
+    Name = "mysql1"
+    mysql = true
+    mysql_master = true
+  }
+
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
+}
+
+resource "aws_instance" "mysql2" {
+  ami                         = "ami-04c58523038d79132"
+  instance_type               = "t2.small"
+  key_name                    = "asaushkin"
+  associate_public_ip_address = true
+  vpc_security_group_ids      = ["sg-07c4666eb1d450f1e"]
+
+  tags = {
+    Name = "mysql2"
+    mysql = true
+    mysql_slave = true
+  }
+
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
+}

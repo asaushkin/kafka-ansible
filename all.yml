@@ -1,5 +1,5 @@
 - name: Host Prerequisites
-  hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest
+  hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest:mysql
   tasks:
   - name: Add a new user
     user:
@@ -22,6 +22,19 @@
   - import_role:
       name: confluent.ssl
     when: kafka_broker_listeners | ssl_required
+
+- name: Mysql Provisioning
+  hosts: mysql
+  tags:
+    - mysql
+  tasks:
+    - name: Install mysql packages
+      package:
+        name:
+          - mysql-client
+          - mysql-common
+          - mysql-server
+        state: present
 
 - name: Zookeeper Provisioning
   hosts: zookeeper
