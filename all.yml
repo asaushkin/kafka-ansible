@@ -1,15 +1,31 @@
 - name: Host Prerequisites
   hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest:mysql
+  tags:
+    prerequisites
   tasks:
+
   - name: Add a new user
     user:
-      name: ags
+      name: "{{ item }}"
       shell: /bin/bash
+    loop:
+      - ags
+      - ndementev
+      - ialmakaev
+      - tdavletov
+
   - name: Deploy SSH Key
     authorized_key:
-      user: ags
-      key: "{{ lookup('file', '/home/ags/.ssh/id_rsa.pub') }}"
+      user: "{{ item }}"
+      key: "{{ lookup('file', 'ssh_keys/' ~ item) }}"
       state: present
+      manage_dir: yes
+    loop:
+      - ags
+      - ndementev
+      - ialmakaev
+#      - tdavletov
+
   - name: Add devops user to the sudoers
     copy:
       dest: "/etc/sudoers.d/ags"

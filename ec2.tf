@@ -13,6 +13,11 @@ provider "aws" {
   skip_credentials_validation = true
 }
 
+resource "aws_eip" "kafka1" {
+  instance = aws_instance.kafka1.id
+  vpc      = true
+}
+
 resource "aws_instance" "kafka1" {
   ami                         = "ami-04c58523038d79132"
   instance_type               = "t2.medium"
@@ -36,6 +41,11 @@ resource "aws_instance" "kafka1" {
   }
 }
 
+resource "aws_eip" "kafka2" {
+  instance = aws_instance.kafka2.id
+  vpc      = true
+}
+
 resource "aws_instance" "kafka2" {
   ami                         = "ami-04c58523038d79132"
   instance_type               = "t2.medium"
@@ -55,6 +65,11 @@ resource "aws_instance" "kafka2" {
       ami
     ]
   }
+}
+
+resource "aws_eip" "kafka3" {
+  instance = aws_instance.kafka3.id
+  vpc      = true
 }
 
 resource "aws_instance" "kafka3" {
@@ -77,6 +92,11 @@ resource "aws_instance" "kafka3" {
   }
 }
 
+//resource "aws_eip" "control-center" {
+//  instance = aws_instance.control-center.id
+//  vpc      = true
+//}
+
 resource "aws_instance" "control-center" {
   ami                         = "ami-04c58523038d79132"
   instance_type               = "t2.medium"
@@ -94,6 +114,11 @@ resource "aws_instance" "control-center" {
       ami
     ]
   }
+}
+
+resource "aws_eip" "mysql1" {
+  instance = aws_instance.mysql1.id
+  vpc      = true
 }
 
 resource "aws_instance" "mysql1" {
@@ -114,6 +139,11 @@ resource "aws_instance" "mysql1" {
       ami
     ]
   }
+}
+
+resource "aws_eip" "mysql2" {
+  instance = aws_instance.mysql2.id
+  vpc      = true
 }
 
 resource "aws_instance" "mysql2" {
